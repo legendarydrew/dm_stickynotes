@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if notes.count %}
+<ul>
+{% for note in notes %}
+<li>
+    <b role="heading">{{ note.title }}</b><br>
+    {{ note.content }}
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p><em>There are no sticky notes.</em></p>
+{% endif %}
+{% endblock %}
