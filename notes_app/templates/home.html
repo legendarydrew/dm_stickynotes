@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if notes.count %}
-<ul>
-{% for note in notes %}
-<li>
-    <b role="heading">{{ note.title }}</b><br>
-    {{ note.content }}
-</li>
-{% endfor %}
-</ul>
-{% else %}
-<p><em>There are no sticky notes.</em></p>
-{% endif %}
+    <div class="d-flex justify-content-center my-4">
+        <a class="btn btn-primary btn-lg" href="{% url 'create_note' %}">Create a note</a>
+    </div>
+
+    {% if notes.count %}
+    <ul class="d-flex flex-wrap list-unstyled gap-2">
+    {% for note in notes %}
+    <li class="sticky-note">
+        <h3 class="title">{{ note.title }}</h3>
+        <span class="content">{{ note.content }}</span>
+        <!-- TODO update note. -->
+        <!-- TODO delete note. -->
+    </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p><em>There are no sticky notes.</em></p>
+    {% endif %}
+
 {% endblock %}
