@@ -46,8 +46,10 @@ def update_view(request, note_id):
     return render(request, 'update_note.html', {'form': form})
 
 
-def delete_view(request):
+def delete_view(request, note_id):
     """
     Used when the user deletes a note.
     """
+    note = get_object_or_404(StickyNote, pk=note_id)
+    note.delete()
     return redirect('home')
