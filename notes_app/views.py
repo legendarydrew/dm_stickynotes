@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import StickyNote 
 from .forms import NoteForm
@@ -39,7 +40,9 @@ def update_view(request, note_id):
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
-            note = form.save()
+            note = form.save(commit=False)
+            note.updated_at = datetime.datetime.now()
+            note.save()
             return redirect('home')
     else:
         form = NoteForm(instance=note)

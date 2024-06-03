@@ -9,12 +9,7 @@
     <ul class="d-flex flex-wrap list-unstyled gap-2">
         {% for note in notes %}
         <li class="sticky-note">
-            <h3 class="title">{{ note.title }}</h3>
-            <span class="content">{{ note.content }}</span>
-            <div class="buttons">
-                <a href="{% url 'update_note' note_id=note.pk %}" class="btn btn-secondary btn-sm">Update</a>
-                <a href="{% url 'delete_note' note_id=note.pk %}" class="btn btn-danger btn-sm">Delete</a>
-            </div>
+            {% include 'sticky_note.html' with note=note %}
         </li>
         {% endfor %}
     </ul>

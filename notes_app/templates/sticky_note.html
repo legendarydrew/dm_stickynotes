@@ -1,0 +1,7 @@
+<h3 class="title">{{ note.title }}</h3>
+<span class="content">{{ note.content }}</span>
+<span class="date">{{ note.updated_at }}</span>
+<div class="buttons">
+    <a href="{% url 'update_note' note_id=note.pk %}" class="btn btn-secondary btn-sm">Update</a>
+    <a href="{% url 'delete_note' note_id=note.pk %}" class="btn btn-danger btn-sm">Delete</a>
+</div>

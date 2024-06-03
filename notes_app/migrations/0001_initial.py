@@ -13,22 +13,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='User',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=30)),
-                ('last_name', models.CharField(max_length=30)),
-                ('email', models.EmailField(max_length=254)),
-                ('password', models.CharField(max_length=20)),
-                ('created_at', models.DateTimeField(auto_now=True)),
-            ],
-        ),
-        migrations.CreateModel(
             name='StickyNote',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='notes_app.user')),
                 ('created_at', models.DateTimeField(auto_now=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('title', models.CharField(default='Note', max_length=80)),
