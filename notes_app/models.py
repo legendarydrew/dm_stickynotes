@@ -5,7 +5,7 @@ from django.db import models
 
 class StickyNote(models.Model):
     # The task calls for both a title and content field for a sticky note.
-    title = models.CharField(max_length=80, null=True)
+    title = models.CharField(max_length=80)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
