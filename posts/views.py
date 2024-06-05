@@ -39,8 +39,8 @@ def post_create(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            if request.user.is_authenticated:
-                post.author = request.user
+            # if request.user.is_authenticated:
+            #     post.author = request.user
             post.save()
             return redirect('post_list')
     else:

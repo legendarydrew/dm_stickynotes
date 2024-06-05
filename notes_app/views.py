@@ -1,16 +1,24 @@
 import datetime
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import StickyNote 
+from .models import StickyNote
 from .forms import NoteForm
+from posts.models import Post
+
+'''
+I'm using the Post model from the posts app.
+https://stackoverflow.com/a/67601280/4073160
+'''
+
 
 # Create your views here.
 def home_view(request):
     """
-    The main page, displaying all of the user's notes.
+    The main page, displaying all the user's notes.
     """
 
     context = {
-        'notes': StickyNote.objects.all()
+        'notes': StickyNote.objects.all(),
+        'posts': Post.objects.all(),
     }
 
     return render(request, 'home.html', context)
