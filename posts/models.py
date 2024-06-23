@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 # Create your models here.
@@ -21,16 +22,5 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     # Define a ForeignKey for the author's relationship
-    author = models.ForeignKey('Author', on_delete=models.CASCADE, null=True, blank=True)
-
-
-class Author(models.Model):
-    """
-    Model representing the author of a bulletin board post.
-    Fields:
-    - name: CharField for the author's name.
-    Methods:
-    - No specific methods are defined in this model.
-    :param models.Model: Django's base model class.
-    """
-    name = models.CharField(max_length=255)
+    # Changing the author relationship to use the User table.
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)

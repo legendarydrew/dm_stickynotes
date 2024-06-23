@@ -19,11 +19,26 @@
     <link href="/static/notes.css" rel="stylesheet">
   </head>
   <body class="d-flex flex-column">
-    <header class="bg-dark text-light p-2">
-        <div class="container">
-            <h1>{% block header %}Sticky Notes Django App{% endblock %}</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            {% block header %}Sticky Notes Django App{% endblock %}
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if request.user.is_authenticated %}
+            <form id="logout-form" class="ms-auto" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{% url 'login' %}">
+                <button type="submit" class="btn btn-default">Logout</button>
+            </form>
+            {% endif %}
         </div>
-    </header>
+        </div>
+</nav>
 
     <main class="container py-3 flex-grow-1">{% block content %}{% endblock %}</main>
 

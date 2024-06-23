@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row g-5">
+<h1 class="text-center fs-4 mt-2 mb-5">
+    Welcome, {{ user }}.
+</h1>
 
+<div class="row g-5">
     <!-- List of sticky notes. -->
     <div class="col-lg-8">
-        <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+        <div class="text-bg-secondary p-2 d-flex justify-content-between align-items-center gap-2 mb-3">
             <h2 class="fs-5 m-0">Your Sticky Notes</h2>
             <a class="btn btn-primary" href="{% url 'create_note' %}">Create a note</a>
         </div>
@@ -19,14 +22,14 @@
             {% endfor %}
         </ul>
         {% else %}
-            <p class="p-5 text-center text-secondary">
-                <em>There are no sticky notes.</em>
-            </p>
+        <p class="p-5 text-center text-secondary">
+            <em>There are no sticky notes.</em>
+        </p>
         {% endif %}
     </div>
 
     <div class="col-lg-4">
-        <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+        <div class="text-bg-info p-2 d-flex justify-content-between align-items-center gap-2 mb-3">
             <h2 class="fs-5 m-0">Latest Posts</h2>
             <a class="btn btn-secondary" href="{% url 'post_create' %}">Create a post</a>
         </div>
@@ -37,16 +40,17 @@
             <li class="post">
                 <h3 class="title">{{ post.title }}</h3>
                 <p class="content">{{ post.content }}</p>
-                <p class="timestamp">Created at {{ post.created_at }}</p>
+                <p class="timestamp">Created at {{ post.created_at }} by {{ post.author }}</p>
             </li>
             {% endfor %}
         </ul>
         {% else %}
-            <p class="p-5 text-center text-secondary">
-                <em>There are no posts.</em>
-            </p>
+        <p class="p-5 text-center text-secondary">
+            <em>There are no posts.</em>
+        </p>
         {% endif %}
     </div>
+</div>
 </div>
 
 {% endblock %}
