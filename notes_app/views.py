@@ -1,9 +1,9 @@
 import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import StickyNote
-from .forms import NoteForm
-from posts.models import Post
+from .models import StickyNote, Post
+from .forms import NoteForm, PostForm
+
 
 '''
 I'm using the Post model from the posts app.
@@ -29,7 +29,7 @@ def home_view(request):
 
 
 @login_required
-def create_view(request):
+def create_note_view(request):
     """
     Used when the user creates a note.
     """
@@ -50,7 +50,29 @@ def create_view(request):
 
 
 @login_required
-def update_view(request, note_id):
+def create_post_view(request):
+    """
+    Used when the user creates a post.
+    """
+    if request.method == 'POST':
+        """
+        Create a new post, automatically setting the logged-in user
+        as the author.
+        """
+        form = PostForm(request.POST)
+        if form.is_valid():
+            note = form.save(commit=False)
+            note.author = request.user
+            note.save()
+            return redirect('home')
+    else:
+        # The user has landed on the page.
+        form = PostForm()
+    return render(request, 'create_Post.html', {'form': form})
+
+
+@login_required
+def update_note_view(request, note_id):
     """
     Used when the user updates a note.
     Users should only be able to update their own notes.
@@ -73,7 +95,7 @@ def update_view(request, note_id):
 
 
 @login_required
-def delete_view(request, note_id):
+def delete_note_view(request, note_id):
     """
     Used when the user deletes a note.
     If successful, the user is redirected to the home page.

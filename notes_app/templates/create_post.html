@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Create a new note{% endblock %}
+
+{% block header %}New note{% endblock %}
+
+{% block content %}
+    {% include 'post_form.html' with submit_text='Create Post!' %}
+{% endblock %}
