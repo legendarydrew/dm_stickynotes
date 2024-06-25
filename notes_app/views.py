@@ -1,6 +1,5 @@
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import StickyNote, Post
 from .forms import NoteForm, PostForm, RegisterForm
