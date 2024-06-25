@@ -24,8 +24,9 @@
         {{ form.password.label_tag }}
         {{ form.password }}
     </div>
-    <div class="d-grid">
+    <div class="d-grid gap-1">
       <button type="submit" class="btn btn-primary">Log in</button>
+      <a class="btn btn-secondary" href="{% url 'register' %}">Register</a>
     </div>
     <input type="hidden" name="next" value="{% url 'home' %}">
   </form>

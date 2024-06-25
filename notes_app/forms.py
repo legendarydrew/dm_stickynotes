@@ -1,11 +1,19 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import StickyNote, Post
+
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
 
 
 class NoteForm(forms.ModelForm):
     """
     This sets up a form for creating or updating a StickyNote.
     """
+
     class Meta:
         model = StickyNote
         fields = ['title', 'content']

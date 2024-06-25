@@ -71,6 +71,10 @@ body {
 .login-form input {
     width: 100%;
 }
+.login-form .helptext {
+    font-size: small;
+    margin: 0.5rem;
+}
 
 .post {
     background: #F8F8F8;
@@ -93,3 +97,4 @@ body {
     font-size: 0.75rem;
     margin: 0;
 }
+

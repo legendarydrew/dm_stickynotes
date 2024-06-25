@@ -2,8 +2,7 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import StickyNote, Post
-from .forms import NoteForm, PostForm
-
+from .forms import NoteForm, PostForm, RegisterForm
 
 '''
 I'm using the Post model from the posts app.
@@ -103,3 +102,21 @@ def delete_note_view(request, note_id):
     note = get_object_or_404(StickyNote, pk=note_id, owner=request.user)
     note.delete()
     return redirect('home')
+
+
+def register_view(request):
+    """
+    A new user registration page.
+    """
+    if request.method == 'POST':
+        # Information was submitted: attempt to create a new user.
+        # If successful, redirect to the login page.
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/login')
+    else:
+        form = RegisterForm()
+
+    context = {'form': form }
+    return render(request, 'registration/register.html', context)
