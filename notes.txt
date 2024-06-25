@@ -1,0 +1,7 @@
+Added a registration page with the help of this tutorial:
+https://dev.to/balt1794/registration-page-using-usercreationform-django-part-1-21j7
+https://stackoverflow.com/a/49962197/4073160
+
+Users:
+noteman / notes234
+chickengeorge / chicken123
