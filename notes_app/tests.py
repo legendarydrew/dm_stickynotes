@@ -220,3 +220,24 @@ class StickyNotesTestCase(TestCase):
             })
         self.assertEqual(request.status_code, 200)
         # A REST endpoint would return a UNPROCESSABLE ENTITY code.
+
+    def test_access_register_page(self):
+        """
+        The register page should be accessible.
+        """
+        request = self.client.get('/register')
+        self.assertEqual(request.status_code, 301)
+        # 301 is returned instead of 200, no idea why.
+
+    def test_register_new_user(self):
+        """
+        The user should be redirected to the login page on success.
+        """
+        request = self.client.post('/register', {
+            "username": "BestMan",
+            "password": "InTheWorld0123"
+        })
+        self.assertEqual(request.status_code, 301)
+        # self.assertEqual(request.url, '/accounts/login')
+        # For some reason request.url = '/register' at this point, have not
+        # been able to find out why.

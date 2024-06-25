@@ -41,4 +41,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # Define a ForeignKey for the author's relationship
     # Changing the author relationship to use the User table.
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               on_delete=models.CASCADE,
+                               null=True,
+                               blank=True)

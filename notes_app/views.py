@@ -1,13 +1,9 @@
-import datetime
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import StickyNote, Post
 from .forms import NoteForm, PostForm, RegisterForm
-
-'''
-I'm using the Post model from the posts app.
-https://stackoverflow.com/a/67601280/4073160
-'''
 
 
 # Create your views here.
@@ -84,7 +80,7 @@ def update_note_view(request, note_id):
         form = NoteForm(request.POST, instance=note)
         if form.is_valid():
             note = form.save(commit=False)
-            note.updated_at = datetime.datetime.now()
+            note.updated_at = timezone.now()
             note.save()
             return redirect('home')
     else:
@@ -113,10 +109,15 @@ def register_view(request):
         # If successful, redirect to the login page.
         form = RegisterForm(request.POST)
         if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            # Ensure the password is saved as a hashed value.
+            user.updated_at = timezone.now()
             form.save()
             return redirect('/accounts/login')
     else:
+        # Landed on the page.
         form = RegisterForm()
 
-    context = {'form': form }
+    context = {'form': form}
     return render(request, 'registration/register.html', context)
